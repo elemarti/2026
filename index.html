@@ -502,7 +502,7 @@ letterParagraphs: [
   "Me quedo con la forma en la que nos miramos, con lo natural que fue todo, con la risa que sale sola y con esos silencios que no incomodan. Me quedo con lo fácil que resulta compartir tiempo contigo, con lo bonito que es sentirme cuidada y, a la vez, tener ganas de cuidarte. Con esa complicidad que estamos construyendo paso a paso, sin prisa, como si la vida nos estuviera indicando: “'¡sí, por aquí!”.\n\n",
   "Quiero seguir compartiendo contigo momentos de risa, de lágrimas, de “obras” individuales y compartidas (con llaves inglesas y mucho rotaflex), de pelis, de freestyles, de conversaciones incómodas que hacen que esto sea más fuerte, y de planes improvisados. Quiero seguir estando cuando tengas un día bueno y también cuando tengas un día de esos que pesan, para agarrarte la manita, escucharte y recordarte lo valiosa que eres, que no se te debe olvidar jamás. Quiero que sigamos ayudándonos, empujándonos hacia lo mejor, poniéndonos tiritas de Cars o de cualquier dibujito que mole en las heridas cuando haga falta y celebrando juntas cada pequeña victoria.\n\n",
   "Me encanta que podamos estar en la vida de la otra y sumar, sin restar, acompañándonos sin perdernos a nosotras mismas. Y lo más bonito de todo es que, sabiendo que podemos estar la una sin la otra, nos elegimos cada día de la manera más sana posible.\n\n",
-  "Así que lo que le pido a 2025 es seguir conociéndote más, seguir descubriendo tus rinconcitos, tus heridas, tus manías, tus sueños, tus miedos, y aumentar cada vez más ese porcentaje de conocimiento. También seguir aprendiendo de ti, y que tú también puedas ir conociéndome a mí, de esa forma tan bonita en la que nos estamos encontrando. Le pido a 2025 que nos siga regalando tiempo: momentos especiales, pero también cotidianos, oportunidades para vernos, para abrazarnos, para mirarnos de cerca, y libertad para soltarnos y seguir fluyendo sin presiones.\n\n",
+  "Así que lo que le pido a 2026 es seguir conociéndote más, seguir descubriendo tus rinconcitos, tus heridas, tus manías, tus sueños, tus miedos, y aumentar cada vez más ese porcentaje de conocimiento. También seguir aprendiendo de ti, y que tú también puedas ir conociéndome a mí, de esa forma tan bonita en la que nos estamos encontrando. Le pido a 2026 que nos siga regalando tiempo: momentos especiales, pero también cotidianos, oportunidades para vernos, para abrazarnos, para mirarnos de cerca, y libertad para soltarnos y seguir fluyendo sin presiones.\n\n",
   "Quiero cerrar recordándote que te admiro y que estoy muy orgullosa de ti. Vas subiendo muchos peldaños de las escaleras y poniendo cientos de ladrillitos en la obra. Este año has plantado cara a muchos de tus miedos y estás luchando como una campeona. La Irene de 2024 estaría muy feliz si te viera en una pantallita ahora, y lo sabes. Eres muy valiosa y, por eso y por mucho más, quiero seguir viendo a tu ladito lo que te depara el 2026, que seguro que trae muchas cositas bonitas. Y las que no sean tanto, ahí me tendrás.\n\n",
   "Gracias por darme la oportunidad de conocerte.\n\n",
   "Con cariño,\n"
@@ -655,11 +655,9 @@ letterParagraphs: [
       }
     }
 
-    // Imagen del sobre (esto era lo que se te rompía si el script petaba)
     if (envImgBg) envImgBg.src = CONFIG.envelopeImageUrl;
     if (envImgMain) envImgMain.src = CONFIG.envelopeImageUrl;
 
-    // Foto dentro de la carta + bloques
     if (CONFIG.photoUrl && CONFIG.photoUrl.trim() !== "") {
       if (photoImg) photoImg.src = CONFIG.photoUrl.trim();
       if (photoBox) photoBox.style.display = "grid";
@@ -783,7 +781,6 @@ letterParagraphs: [
       tick();
     }
 
-    // Eventos: SOLO SOBRE
     if (envelope){
       envelope.addEventListener("click", openLetter);
       envelope.addEventListener("keydown", (e) => {
@@ -803,3 +800,4 @@ letterParagraphs: [
   </script>
 </body>
 </html>
+
