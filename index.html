@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#0b1020" />
+  <title>Feliz 2026 ✨</title>
+
   <style>
     :root{
       --bg:#0b1020;
@@ -14,6 +16,7 @@
       --radius:22px;
     }
     *{box-sizing:border-box}
+
     body{
       margin:0; min-height:100vh;
       color:var(--text);
@@ -25,11 +28,32 @@
         linear-gradient(180deg, #070a14 0%, var(--bg) 35%, #070a14 100%);
       overflow-x:hidden;
     }
+
+    /* brillitos suaves */
+    body::after{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(2px 2px at 12% 22%, rgba(255,255,255,.55), transparent 60%),
+        radial-gradient(1.5px 1.5px at 28% 68%, rgba(255,255,255,.35), transparent 60%),
+        radial-gradient(2px 2px at 76% 18%, rgba(255,255,255,.45), transparent 60%),
+        radial-gradient(1.5px 1.5px at 84% 74%, rgba(255,255,255,.30), transparent 60%),
+        radial-gradient(2px 2px at 46% 14%, rgba(255,255,255,.40), transparent 60%),
+        radial-gradient(1.5px 1.5px at 52% 82%, rgba(255,255,255,.28), transparent 60%);
+      opacity:.22;
+      filter: blur(.2px);
+    }
+
     .wrap{width:min(980px, 92vw); margin:0 auto; padding:22px 0 70px}
+
     header{
       display:flex; align-items:center; justify-content:space-between; gap:12px;
       padding:10px 6px; flex-wrap:wrap;
     }
+
+    .hidden{display:none !important}
+
     .chip{
       display:inline-flex; align-items:center; gap:10px;
       padding:9px 12px;
@@ -41,6 +65,7 @@
       backdrop-filter: blur(10px);
     }
     .chip b{color:var(--text)}
+
     .actions{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; align-items:center}
 
     /* ======== Control de audio ======== */
@@ -51,6 +76,7 @@
       border-radius:12px;
       background: rgba(255,255,255,.08);
       backdrop-filter: blur(10px);
+      box-shadow: 0 14px 30px rgba(0,0,0,.25);
     }
     .volBtn{
       width:40px; height:38px;
@@ -62,9 +88,12 @@
       cursor:pointer;
       user-select:none;
       touch-action: manipulation;
-      transition: transform .08s ease, background .18s ease;
+      transition: transform .08s ease, background .18s ease, border-color .18s ease;
     }
-    .volBtn:hover{background: rgba(255,255,255,.10)}
+    .volBtn:hover{
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.22);
+    }
     .volBtn:active{transform: translateY(1px)}
     .volRange{width:130px; accent-color: var(--accent)}
     .volHint{font-size:12px; color:var(--muted); margin-left:4px}
@@ -72,29 +101,63 @@
     .panel{
       border:1px solid var(--stroke);
       border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
       box-shadow: 0 18px 50px rgba(0,0,0,.35);
       overflow:hidden;
+      position:relative;
+    }
+    .panel::before{
+      content:"";
+      position:absolute; inset:-2px;
+      pointer-events:none;
+      background: radial-gradient(800px 280px at 20% 0%, rgba(255,211,106,.10), transparent 60%);
+      opacity:.75;
     }
 
     /* HERO */
     .hero{margin-top:14px}
     .heroGrid{display:grid; grid-template-columns: 1fr 420px; gap:0}
     @media (max-width: 940px){ .heroGrid{grid-template-columns:1fr} }
-    .left{padding:24px 22px 18px 22px}
+
+    .left{padding:26px 22px 18px 22px; position:relative; z-index:1}
     .title{
       margin:0;
-      font-size: clamp(28px, 3.6vw, 44px);
+      font-size: clamp(28px, 3.6vw, 46px);
       line-height:1.06;
       letter-spacing:.2px;
     }
-    .spark{color: var(--accent); text-shadow: 0 0 22px rgba(255,211,106,.25)}
-    .subtitle{margin:12px 0 0 0; color:var(--muted); font-size:15px; line-height:1.65; max-width:62ch}
+    .spark{
+      color: var(--accent);
+      text-shadow: 0 0 22px rgba(255,211,106,.25);
+    }
+    .subtitle{
+      margin:12px 0 0 0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+      max-width:62ch;
+    }
+    .hint{
+      margin-top:12px;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.14);
+      color: rgba(255,255,255,.88);
+      font-size:13px;
+    }
+    .hint span{opacity:.9}
+
     .right{
       border-left: 1px solid rgba(255,255,255,.10);
       background: linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.08));
       padding:18px 18px 22px 18px;
       display:grid; place-items:center;
+      position:relative;
+      z-index:1;
     }
     @media (max-width: 940px){
       .right{border-left:0; border-top:1px solid rgba(255,255,255,.10)}
@@ -118,12 +181,23 @@
       transform: translateZ(0);
       border-radius: 20px;
       box-shadow: 0 18px 60px rgba(0,0,0,.45);
+      transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+      outline:none;
     }
+    .envelope:hover{
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 26px 70px rgba(0,0,0,.52);
+      filter: saturate(1.04);
+    }
+    .envelope:focus-visible{
+      box-shadow: 0 26px 70px rgba(0,0,0,.52), 0 0 0 3px rgba(255,211,106,.25);
+    }
+
     .envFrame{
       position:absolute; inset:0;
       border-radius: 20px;
       overflow:hidden;
-      border:1px solid rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.18);
       background: rgba(255,255,255,.03);
     }
     .envPhoto{position:absolute; inset:0}
@@ -298,8 +372,6 @@
     @media (prefers-reduced-motion: reduce){
       .envFlap, .envLetter{transition:none}
       .cursor{animation:none}
-      /* si prefieres que salga aun con reduce motion, borra la línea de abajo */
-      /* #confettiCanvas{display:none} */
     }
   </style>
 </head>
@@ -313,7 +385,12 @@
 
   <div class="wrap">
     <header>
-      <div class="subtitle">✨ <span>De <b id="toNameChip">Irene</b> — <b>2026</b></span></div>
+      <!--
+        IMPORTANTE:
+        NO BORRES ESTO si tu JS usa #toNameChip.
+        Lo dejamos, pero oculto, para que NO salga arriba y NO te rompa el script.
+      -->
+      <div class="subtitle hidden" aria-hidden="true">✨ <span>De <b id="toNameChip">Irene</b> — <b>2026</b></span></div>
 
       <div class="actions">
         <div class="audioCtl" aria-label="Control de música">
@@ -331,9 +408,11 @@
         <div class="left">
           <h1 class="title"><span id="toNameTitle">Irene</span>, <span class="spark">feliz 2026</span> 💝</h1>
           <p class="subtitle">
-            
-Una personita especial, se merece una felicitación de año especial. Quería dejarte algo bonito para empezar el año: una cartita escrita por mí, solo para ti. Si quieres leerla, tan solo tienes que pulsar en el sobre decorado con nuestra fotito. Al abrirlo, podrás escuchar una melodía que te resultará familiar. Espero que te guste y te haga comenzar el 2026 con una sonrisa.
+            Una personita especial, se merece una felicitación de año especial. Quería dejarte algo bonito para empezar el año:
+            una cartita escrita por mí, solo para ti. Si quieres leerla, tan solo tienes que pulsar en el sobre decorado con nuestra fotito.
+            Al abrirlo, podrás escuchar una melodía que te resultará familiar. Espero que te guste y te haga comenzar el 2026 con una sonrisa.
           </p>
+          <div class="hint">💌 <span>Pulsa el sobre para abrir la carta</span></div>
         </div>
 
         <div class="right">
@@ -405,7 +484,7 @@ Una personita especial, se merece una felicitación de año especial. Quería de
   document.addEventListener("DOMContentLoaded", () => {
     const CONFIG = {
       toName: "Irene",
-      fromName: "— Yo",
+      fromName: "— Elena 💙",
       dateText: "1 de enero de 2026",
 
       envelopeImageUrl: "sobre.jpg",
@@ -415,20 +494,22 @@ Una personita especial, se merece una felicitación de año especial. Quería de
 
       photoUrl: "",
 
-      letterParagraphs: [
-        "Irene,\n",
-        "Quería empezar 2026 dejándote esto por escrito, porque hay cosas que en el día a día se dicen poco: estoy orgulloso de ti.\n",
-        "Este año no ha sido fácil, y aun así has seguido. A veces con fuerza, a veces con cansancio, a veces simplemente tirando… pero has seguido. Y eso vale muchísimo.\n",
-        "Has conseguido cosas que quizá desde fuera parecen pequeñas, pero en realidad son enormes: levantarte cuando te costaba, volver a intentar, cuidarte un poco más, poner límites cuando tocaba, y seguir siendo tú incluso en días grises.\n",
-        "Ojalá 2026 te trate con más calma, más luz y más ratitos buenos. Y si en algún momento te apetece compartir alguno de esos ratitos conmigo… yo encantado.\n",
-        "\nFeliz 2026, Irene ✨\n"
-      ],
+letterParagraphs: [
+  "Dado que no puedo empezar el 2026 de manera física contigo, dándote muchos abracitos y comiéndote a besos, quiero dedicarte unas palabritas de manera virtual para que te llegue mi calorcito desde Espartinas.\n\n",
+  "Ya sabes que no suelo hacer cierre de año, pero no puedo evitar pensar en todo esto tan bonito que nos ha regalado la vida en el mes de octubre.\n\n",
+  "Al principio me generó mucha intriga conocerte, ya que vi que teníamos bastantes cosas en común y quería saber más y más de ti. Con el tiempo, lo que comenzó siendo mensajes cada dos o tres días se convirtió en largas conversaciones a diario, en las que sentía que estaba conociendo a una niña muy bonita en todos los sentidos. Poco a poco empecé a tener sentimientos muy especiales por ti y fuiste ganándote mi corazoncito.\n\n",
+  "Este final de año ha sido muy especial para mí porque ha sido el momento en el que por fin pude verte en persona y comprobar que todo eso que estaba sintiendo no se quedaba en una pantalla, sino que era real. Ya no era solo la emoción de los mensajes o de las llamadas, sino la certeza de mirarte y reconocer esa sensación de paz, de “aquí estoy a gusto”. Y me encantó darme cuenta de que contigo puedo ser yo misma, sin enmascarar ni sin forzar nada.\n\n",
+  "Me quedo con la forma en la que nos miramos, con lo natural que fue todo, con la risa que sale sola y con esos silencios que no incomodan. Me quedo con lo fácil que resulta compartir tiempo contigo, con lo bonito que es sentirme cuidada y, a la vez, tener ganas de cuidarte. Con esa complicidad que estamos construyendo paso a paso, sin prisa, como si la vida nos estuviera indicando: “'¡sí, por aquí!”.\n\n",
+  "Quiero seguir compartiendo contigo momentos de risa, de lágrimas, de “obras” individuales y compartidas (con llaves inglesas y mucho rotaflex), de pelis, de freestyles, de conversaciones incómodas que hacen que esto sea más fuerte, y de planes improvisados. Quiero seguir estando cuando tengas un día bueno y también cuando tengas un día de esos que pesan, para agarrarte la manita, escucharte y recordarte lo valiosa que eres, que no se te debe olvidar jamás. Quiero que sigamos ayudándonos, empujándonos hacia lo mejor, poniéndonos tiritas de Cars o de cualquier dibujito que mole en las heridas cuando haga falta y celebrando juntas cada pequeña victoria.\n\n",
+  "Me encanta que podamos estar en la vida de la otra y sumar, sin restar, acompañándonos sin perdernos a nosotras mismas. Y lo más bonito de todo es que, sabiendo que podemos estar la una sin la otra, nos elegimos cada día de la manera más sana posible.\n\n",
+  "Así que lo que le pido a 2025 es seguir conociéndote más, seguir descubriendo tus rinconcitos, tus heridas, tus manías, tus sueños, tus miedos, y aumentar cada vez más ese porcentaje de conocimiento. También seguir aprendiendo de ti, y que tú también puedas ir conociéndome a mí, de esa forma tan bonita en la que nos estamos encontrando. Le pido a 2025 que nos siga regalando tiempo: momentos especiales, pero también cotidianos, oportunidades para vernos, para abrazarnos, para mirarnos de cerca, y libertad para soltarnos y seguir fluyendo sin presiones.\n\n",
+  "Quiero cerrar recordándote que te admiro y que estoy muy orgullosa de ti. Vas subiendo muchos peldaños de las escaleras y poniendo cientos de ladrillitos en la obra. Este año has plantado cara a muchos de tus miedos y estás luchando como una campeona. La Irene de 2024 estaría muy feliz si te viera en una pantallita ahora, y lo sabes. Eres muy valiosa y, por eso y por mucho más, quiero seguir viendo a tu ladito lo que te depara el 2026, que seguro que trae muchas cositas bonitas. Y las que no sean tanto, ahí me tendrás.\n\n",
+  "Gracias por darme la oportunidad de conocerte.\n\n",
+  "Con cariño,\n"
+],
 
-      highlightBlocks: [
-        { title: "Lo que has hecho bien", text: "Seguir incluso cuando no apetecía." },
-        { title: "Lo que has aprendido", text: "Que cuidarte también es avanzar." },
-        { title: "Lo que te mereces", text: "Un año más suave y con más sonrisas." }
-      ],
+
+      
 
       // Audio
       initialVolume: 0.60
@@ -490,7 +571,7 @@ Una personita especial, se merece una felicitación de año especial. Quería de
         "#f72585","#72efdd","#f9c74f","#90be6d"
       ];
 
-      const count = 180; // para que se note sí o sí
+      const count = 180;
       confettiParticles = [];
 
       for (let i = 0; i < count; i++){
@@ -501,7 +582,7 @@ Una personita especial, se merece una felicitación de año especial. Quería de
           x: originX,
           y: originY,
           vx: Math.cos(ang) * sp,
-          vy: Math.sin(ang) * sp - (6 + Math.random() * 6), // empujón hacia arriba
+          vy: Math.sin(ang) * sp - (6 + Math.random() * 6),
           g: 0.22 + Math.random() * 0.12,
           w: 5 + Math.random() * 7,
           h: 7 + Math.random() * 10,
@@ -521,7 +602,6 @@ Una personita especial, se merece una felicitación de año especial. Quería de
 
         let alive = 0;
 
-        // avance aproximado por frame (simple y estable)
         for (const p of confettiParticles){
           p.life += 16.7;
           if (p.life > p.ttl) continue;
@@ -532,7 +612,6 @@ Una personita especial, se merece una felicitación de año especial. Quería de
           p.y += p.vy;
           p.rot += p.vrot;
 
-          // desvanecer al final
           const t = p.life / p.ttl;
           const alpha = (t < 0.75) ? 1 : (1 - (t - 0.75) / 0.25);
 
@@ -557,82 +636,91 @@ Una personita especial, se merece una felicitación de año especial. Quería de
       confettiRAF = requestAnimationFrame(frame);
     }
 
-    // Pintar datos
-    toNameTitle.textContent = CONFIG.toName;
-    toNameChip.textContent = CONFIG.toName;
-    seal.textContent = (CONFIG.toName || "I").trim().charAt(0).toUpperCase();
-    paperMeta.textContent = CONFIG.dateText;
-    letterHeading.textContent = `Para ${CONFIG.toName}`;
+    if (toNameTitle) toNameTitle.textContent = CONFIG.toName;
+    if (toNameChip) toNameChip.textContent = CONFIG.toName;
+    if (seal) seal.textContent = (CONFIG.toName || "I").trim().charAt(0).toUpperCase();
+    if (paperMeta) paperMeta.textContent = CONFIG.dateText;
+    if (letterHeading) letterHeading.textContent = `Querida ${CONFIG.toName},`;
 
-    // Config visual del sobre
-    envelope.style.setProperty("--pos", CONFIG.envelopePosition);
-    envelope.style.setProperty("--zoom", String(CONFIG.envelopeZoom));
+    if (envelope){
+      envelope.style.setProperty("--pos", CONFIG.envelopePosition);
+      envelope.style.setProperty("--zoom", String(CONFIG.envelopeZoom));
 
-    if (CONFIG.envelopeFitMode === "contain-blur") {
-      envelope.style.setProperty("--fit", "contain");
-      envelope.style.setProperty("--showBlur", "1");
-    } else {
-      envelope.style.setProperty("--fit", "cover");
-      envelope.style.setProperty("--showBlur", "0");
+      if (CONFIG.envelopeFitMode === "contain-blur") {
+        envelope.style.setProperty("--fit", "contain");
+        envelope.style.setProperty("--showBlur", "1");
+      } else {
+        envelope.style.setProperty("--fit", "cover");
+        envelope.style.setProperty("--showBlur", "0");
+      }
     }
 
-    // Imagen del sobre
-    envImgBg.src = CONFIG.envelopeImageUrl;
-    envImgMain.src = CONFIG.envelopeImageUrl;
+    // Imagen del sobre (esto era lo que se te rompía si el script petaba)
+    if (envImgBg) envImgBg.src = CONFIG.envelopeImageUrl;
+    if (envImgMain) envImgMain.src = CONFIG.envelopeImageUrl;
 
     // Foto dentro de la carta + bloques
     if (CONFIG.photoUrl && CONFIG.photoUrl.trim() !== "") {
-      photoImg.src = CONFIG.photoUrl.trim();
-      photoBox.style.display = "grid";
-      blocks.innerHTML = "";
-      for (const b of CONFIG.highlightBlocks) {
-        const d = document.createElement("div");
-        d.className = "block";
-        d.innerHTML = `<h3>${escapeHtml(b.title)}</h3><p>${escapeHtml(b.text)}</p>`;
-        blocks.appendChild(d);
+      if (photoImg) photoImg.src = CONFIG.photoUrl.trim();
+      if (photoBox) photoBox.style.display = "grid";
+      if (blocks){
+        blocks.innerHTML = "";
+        for (const b of CONFIG.highlightBlocks) {
+          const d = document.createElement("div");
+          d.className = "block";
+          d.innerHTML = `<h3>${escapeHtml(b.title)}</h3><p>${escapeHtml(b.text)}</p>`;
+          blocks.appendChild(d);
+        }
       }
     } else {
-      photoBox.style.display = "none";
+      if (photoBox) photoBox.style.display = "none";
     }
 
     // ===== Audio =====
     function setVolume(v01){
       const clamped = Math.max(0, Math.min(1, v01));
-      bgm.volume = clamped;
+      if (bgm) bgm.volume = clamped;
       const pct = Math.round(clamped * 100);
-      volRange.value = String(pct);
-      volTxt.textContent = `${pct}%`;
+      if (volRange) volRange.value = String(pct);
+      if (volTxt) volTxt.textContent = `${pct}%`;
 
+      if (!volIcon || !bgm) return;
       if (bgm.muted || clamped === 0) volIcon.textContent = "🔇";
       else if (clamped < 0.5) volIcon.textContent = "🔉";
       else volIcon.textContent = "🔊";
     }
     setVolume(CONFIG.initialVolume);
 
-    async function tryPlayAudio(){ try{ await bgm.play(); }catch{} }
+    async function tryPlayAudio(){ try{ if (bgm) await bgm.play(); }catch{} }
     tryPlayAudio();
 
     const unlockAudioOnce = async () => {
-      try { await bgm.play(); } catch {}
+      try { if (bgm) await bgm.play(); } catch {}
       window.removeEventListener("pointerdown", unlockAudioOnce);
       window.removeEventListener("keydown", unlockAudioOnce);
     };
     window.addEventListener("pointerdown", unlockAudioOnce, { once:false });
     window.addEventListener("keydown", unlockAudioOnce, { once:false });
 
-    volBtn.addEventListener("click", async () => {
-      bgm.muted = !bgm.muted;
-      if (!bgm.muted) { try { await bgm.play(); } catch {} }
-      setVolume(bgm.volume);
-    });
+    if (volBtn){
+      volBtn.addEventListener("click", async () => {
+        if (!bgm) return;
+        bgm.muted = !bgm.muted;
+        if (!bgm.muted) { try { await bgm.play(); } catch {} }
+        setVolume(bgm.volume);
+      });
+    }
 
-    volRange.addEventListener("input", async (e) => {
-      const pct = Number(e.target.value || 0);
-      const v = pct / 100;
-      bgm.muted = (v === 0);
-      setVolume(v);
-      if (!bgm.muted) { try { await bgm.play(); } catch {} }
-    });
+    if (volRange){
+      volRange.addEventListener("input", async (e) => {
+        if (!bgm) return;
+        const pct = Number(e.target.value || 0);
+        const v = pct / 100;
+        bgm.muted = (v === 0);
+        setVolume(v);
+        if (!bgm.muted) { try { await bgm.play(); } catch {} }
+      });
+    }
 
     // ===== Abrir + typewriter =====
     let opened = false;
@@ -643,20 +731,21 @@ Una personita especial, se merece una felicitación de año especial. Quería de
       if (opened) return;
       opened = true;
 
-      hero.classList.add("opened");
-      envelope.classList.add("opened");
+      if (hero) hero.classList.add("opened");
+      if (envelope) envelope.classList.add("opened");
 
-      // Confeti automático (UNA vez) y visible
-      launchConfettiOnceFromElement(envelope);
+      if (envelope) launchConfettiOnceFromElement(envelope);
 
-      content.style.display = "block";
-      setTimeout(() => content.scrollIntoView({behavior:"smooth", block:"start"}), 220);
+      if (content){
+        content.style.display = "block";
+        setTimeout(() => content.scrollIntoView({behavior:"smooth", block:"start"}), 220);
+      }
 
       startTyping();
     }
 
     function startTyping(){
-      if (typing) return;
+      if (typing || !typeArea) return;
       typing = true;
       cancelTyping = false;
 
@@ -670,6 +759,8 @@ Una personita especial, se merece una felicitación de año especial. Quería de
       let i = 0;
 
       const tick = () => {
+        if (!typeArea) return;
+
         if (cancelTyping){
           typeArea.textContent = fullText + "\n" + CONFIG.fromName;
           typing = false;
@@ -693,10 +784,12 @@ Una personita especial, se merece una felicitación de año especial. Quería de
     }
 
     // Eventos: SOLO SOBRE
-    envelope.addEventListener("click", openLetter);
-    envelope.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") openLetter();
-    });
+    if (envelope){
+      envelope.addEventListener("click", openLetter);
+      envelope.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") openLetter();
+      });
+    }
 
     function escapeHtml(s){
       return String(s)
